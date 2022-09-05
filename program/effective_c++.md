@@ -91,3 +91,52 @@ Student::Student(const std::string &name,const int age)
 
 ## 构造/析构/赋值
 ### c++对于类默默编写并调用了那些函数
+default,copy构造函数，析构函数，copy assignment
+>编译器产出的析构函数是非虚函数(non-virtual)，除非这个class的base class自身有virtual析构函数
+### 如果不想使用编译器自动生成的函数，就要明确拒绝
+我们可以将成员函数(构造析构，拷贝构造，拷贝复制)放在private下并且不予实现
+
+### 为多态基类声明virtual析构函数
+这是非常非常重要的一点，很多人都会知道构造函数不能为虚，析构可以，具体为什么呢？
+在我们使用工厂模式的时候，我们会让base class的ptr去指向一个derived class的对象。如果base class的析构函数是non-virtual的，这是非常灾难的，因为它不能完全释放derived所构造出来的资源(一些派生类的成员变量)，形成一个诡异的"局部销毁"现象。**内存泄漏！！！**  
+所以将virtual的析构函数就是允许各个derived class个性化自己的析构函数，并充分释放资源  
+>但同时我们要注意，如果一个class并意图被当作一个base class时，我们最好不要令其析构函数为virtual，因为虚函数会占据额外的开销资源
+
+**总结**：
+1. 如果是一个base class或者带有任何virtual函数，那么它就应该拥有一个virtual析构函数
+2. 如果class设计不是来作为base class的或者不是为了具有多态性，不应该声明virtual析构函数
+
+### 令operator= 返回一个 reference to *this，以及考虑自我赋值
+例如
+```c++
+class Age(){
+    public:
+        ... 
+        Age & operator=(Age& rhs){
+            ...
+            return *this;
+        }
+    private:
+        int age_;
+}
+```
+> 这是一个好习惯，并非强制的，不遵循，编译一样没有问题，但是这样写是一个好习惯
+
+上述代码中，我们可能出现这样的情况
+```c++
+Age a(10);
+a = a;
+```
+尽管，这看上去很蠢，但是我们还是要避免它发生；三种方法：
+1. 传统的方法
+```c++
+Age & operator=(Age rhs){
+    if(this == &rhs) return *this;
+    ...
+    return *this;
+}
+```
+2. 先删除，再构造
+3. swap
+
+## 资源管理
