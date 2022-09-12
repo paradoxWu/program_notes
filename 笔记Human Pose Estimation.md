@@ -2,14 +2,15 @@
 
 ## dataset
 
-![coco](D:\WPS Cloud Files\notes\imgs\coco.png)
-![](D:\WPS Cloud Files\notes\imgs\h36m.png)
+![coco](imgs\coco.png)
 
-![mpii](D:\WPS Cloud Files\notes\imgs\mpii.png)
+![](imgs\h36m.png)
 
-![ntu](D:\WPS Cloud Files\notes\imgs\ntu.png)
+![mpii](imgs\mpii.png)
 
-![smpl](D:\WPS Cloud Files\notes\imgs\smpl.png)
+![ntu](imgs\ntu.png)
+
+![smpl](imgs\smpl.png)
 
 ## 2D
 
@@ -368,7 +369,7 @@ D-->|regress|B
 
 ### Method
 
-![](D:\WPS Cloud Files\notes\imgs\3D Human Mesh Regression with Dense Correspondence.png)
+![](imgs\3D Human Mesh Regression with Dense Correspondence.png)
 
 pipeline里主要由两个部分组成 correspondence net 和 localization network
 
@@ -394,7 +395,7 @@ location $\rightarrow$ Mesh 采用的是一个预先定义好的UV mapping funct
 
 SMPL中UV map 没有保留原本image的连续性, 故这篇论文提出了一个新的UV map 能够更好地保存连续性。
 
-![](D:\WPS Cloud Files\notes\imgs\3D Human Mesh Regression with Dense Correspondence2.png)
+![](imgs\3D Human Mesh Regression with Dense Correspondence2.png)
 
 ## **VIBE: Video Inference for Human Body Pose and Shape Estimation**
 
