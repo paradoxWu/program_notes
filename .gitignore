@@ -2,6 +2,5 @@
 *.pptx
 *.ppt
 grpc_learning/
-image/
 tensorflow/
 sk-learn/
